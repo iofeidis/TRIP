@@ -1,0 +1,5 @@
+# Ignore data, logs
+log*/
+data*/
+output_*/
+.Rproj.user

@@ -1,0 +1,33 @@
+Package: TRIP
+Type: Package
+Title: T-cell Receptor/Immunoglobulin Profiler (TRIP)
+Version: 0.99.0
+Author: Maria Kotouza
+Maintainer: Fotis E. Psomopoulos <fpsom@certh.gr>
+Description: TRIP is a software framework that provides analytics services on 
+    antigen receptor (B cell receptor immunoglobulin, BcR IG | T cell receptor, 
+    TR) gene sequence data. It is a web application written in R Shiny. It takes
+    as input the output files of the IMGT/HighV-Quest tool. Users can select to 
+    analyze the data from each of the input samples separately, or the combined 
+    data files from all samples and visualize the results accordingly.
+License: CC BY-NC-SA 4.0
+Encoding: UTF-8
+LazyData: TRUE
+Imports: 
+    plyr, 
+    data.table, 
+    Biostrings, 
+    plotly, 
+    xtable, 
+    plot3D, 
+    gridExtra,
+    RColorBrewer, 
+    stringdist, 
+    DT, 
+    tidyverse, 
+    rlist
+Enhances: 
+    parallel
+URL: https://github.com/BiodataAnalysisGroup/TRIP
+BugReports: https://github.com/BiodataAnalysisGroup/TRIP/issues
+BiocType: Software
