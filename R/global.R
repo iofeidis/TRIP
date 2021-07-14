@@ -6,38 +6,38 @@
 # source("https://bioconductor.org/biocLite.R") 
 # biocLite("motifStack")
 
-# library(motifStack)  
-library(shiny)
-library(shinyjs)
-library(shinycssloaders)
-library(shinyFiles)
-library(shinyBS)
+# # library(motifStack)  
+# library(shiny)
+# library(shinyjs)
+# library(shinycssloaders)
+# library(shinyFiles)
+# library(shinyBS)
 
-library(plyr)
-library(tidyverse)
-library(data.table)  
+# library(plyr)
+# library(tidyverse)
+# library(data.table)  
 
-library(DT)
+# library(DT)
 
-# library(stringr)
+# # library(stringr)
 
-library(Biostrings)
-library(stringdist)
+# library(Biostrings)
+# library(stringdist)
 
-library(xtable)
-library(plot3D)
-library(gridExtra)
-library(RColorBrewer)
-library(plotly)
+# library(xtable)
+# library(plot3D)
+# library(gridExtra)
+# library(RColorBrewer)
+# library(plotly)
 
-library(parallel)
-library(rlist)
+# library(parallel)
+# library(rlist)
 
-enableBookmarking(store = "server")
+# enableBookmarking(store = "server")
 
 tmp_path<-getwd() #change it to "/tmp" for server
 
-num_of_cores <- detectCores(all.tests = FALSE, logical = TRUE) #change this to the custom number of threads
+num_of_cores <- parallel::detectCores(all.tests = FALSE, logical = TRUE) #change this to the custom number of threads
 
 #logfile
 if(!file.exists(paste0(tmp_path,"/log_files"))){ 

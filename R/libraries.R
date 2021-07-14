@@ -1,25 +1,25 @@
-library(plyr)
-# library(dplyr)
-library(data.table)   
-# library(stringr)
-# library(tidyr)
-library(Biostrings)
-library(plotly)
-library(xtable)
-library(plot3D)
-library(gridExtra)
-library(RColorBrewer)
-library(stringdist)
-library(parallel)
-library(DT) 
-library(tidyverse)
-library(rlist)
+# library(plyr)
+# # library(dplyr)
+# library(data.table)   
+# # library(stringr)
+# # library(tidyr)
+# library(Biostrings)
+# library(plotly)
+# library(xtable)
+# library(plot3D)
+# library(gridExtra)
+# library(RColorBrewer)
+# library(stringdist)
+# library(parallel)
+# library(DT) 
+# library(tidyverse)
+# library(rlist)
 
 # library(motifStack)
 
 tmp_path <- getwd()
 
-num_of_cores <- detectCores(all.tests = FALSE, logical = TRUE) #change this to the custom number of threads
+num_of_cores <- parallel::detectCores(all.tests = FALSE, logical = TRUE) #change this to the custom number of threads
 
 if(!file.exists(paste0(tmp_path,"/log_files"))){ 
   dir.create(paste0(tmp_path,"/log_files"))

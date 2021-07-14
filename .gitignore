@@ -3,3 +3,7 @@ log*/
 data*/
 output_*/
 .Rproj.user
+.Rhistory
+.Rdata
+.httr-oauth
+.DS_Store

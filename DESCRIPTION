@@ -28,6 +28,12 @@ Imports:
     rlist
 Enhances: 
     parallel
+Collate:
+    "libraries.R",
+    "helpers.R",
+    "run_TRIP_without_ui.R",
+    "make_options.R"
 URL: https://github.com/BiodataAnalysisGroup/TRIP
 BugReports: https://github.com/BiodataAnalysisGroup/TRIP/issues
 BiocType: Software
+RoxygenNote: 7.1.1

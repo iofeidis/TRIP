@@ -1,6 +1,6 @@
 testColumnNames <- function(name, files, datapath){ 
   # Set Working Directory on level back
-  setwd("..")
+  # setwd("..")
 
   d = "Datasets loaded:" 
   # for (i in 1:length(name)){
@@ -22,9 +22,9 @@ testColumnNames <- function(name, files, datapath){
   
   # used columns
   if (use_only_useful_columns){
-    input <- read.csv("param/used_columns_only_useful.csv", sep = ";", stringsAsFactors = FALSE, header = F)
+    input <- read.csv("inst/extdata/param/used_columns_only_useful.csv", sep = ";", stringsAsFactors = FALSE, header = F)
   } else {
-    input <- read.csv("param/used_columns.csv", sep = ";", stringsAsFactors = FALSE, header = F)
+    input <- read.csv("inst/extdata/param/used_columns.csv", sep = ";", stringsAsFactors = FALSE, header = F)
   } 
   
   used_columns <- list()
@@ -1909,7 +1909,7 @@ clonotypes <- function(allData, allele, gene, junction, name, run_diagnosis){ # 
     
     print("C7")
     
-    a = mclapply(1:length(name), one_run, mc.cores = detectCores(all.tests = FALSE, logical = TRUE), mc.preschedule = TRUE)
+    a = mclapply(1:length(name), one_run, mc.cores = parallel::detectCores(all.tests = FALSE, logical = TRUE), mc.preschedule = TRUE)
     # a = lapply(1:length(name), one_run) ## for debugging use lapply
 
     for(i in 1:length(name)){
