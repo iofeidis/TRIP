@@ -3856,7 +3856,7 @@ alignment <- function(input, region, germline, name, only_one_germline, use_gene
     type = strsplit(strsplit(as.character(input[[used_columns[["Summary"]][3]]][1])," ")[[1]][2],"V")[[1]][1]
     
     if((type == "IGK") | (type == "IGL")){
-      germline_file = paste0("param/", "Germline sequences alignments ", "IGK", "V ", AAorNtAlignment, ".csv")
+      germline_file = paste0("param/", "Germline_sequences_alignments_", "IGK", "V_", AAorNtAlignment, ".csv")
       Tgermlines = read.csv(germline_file, sep = ";", stringsAsFactors = F, colClasses = c("character"))
       
       if (AAorNtAlignment == "aa"){
@@ -3865,7 +3865,7 @@ alignment <- function(input, region, germline, name, only_one_germline, use_gene
         Tgermlines[,336:351] = "."
       }
       
-      germline_file = paste0("param/", "Germline sequences alignments ", "IGL", "V ", AAorNtAlignment, ".csv")
+      germline_file = paste0("param/", "Germline_sequences_alignments_", "IGL", "V_", AAorNtAlignment, ".csv")
       te = read.csv(germline_file, sep = ";", stringsAsFactors = F, colClasses = c("character"))
       
       
@@ -3874,7 +3874,7 @@ alignment <- function(input, region, germline, name, only_one_germline, use_gene
       Tgermlines = rbind(Tgermlines, te)
       
     } else {
-      germline_file = paste0("param/", "Germline sequences alignments ", type, "V ", AAorNtAlignment, ".csv")
+      germline_file = paste0("param/", "Germline_sequences_alignments_", type, "V_", AAorNtAlignment, ".csv")
       Tgermlines = read.csv(germline_file, sep = ";", stringsAsFactors = F, colClasses = c("character"))
     }
     
