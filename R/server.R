@@ -1,8 +1,6 @@
-#Sys.setenv(R_GSCMD=file.path("C:", "Program Files", "gs","gs9.21", "bin", "gswin32c.exe"))
+# server.R
 
-source("helpers.R")
-
-includeHTML("on_reload.html")
+shiny::includeHTML("on_reload.html")
 
 options(shiny.maxRequestSize=3000*1024^2)
 
@@ -26,7 +24,7 @@ $('.nav li.disabled a').prop('disabled',false)
 $('ul li:has(a[data-value= ' + name + '])').removeClass('disabled');
 } " 
 
-shinyServer( 
+shiny::shinyServer( 
   function(session, input, output) { 
     
     ############################### initialize global variables  ###############################

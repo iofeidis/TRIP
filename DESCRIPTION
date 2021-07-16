@@ -1,6 +1,6 @@
 Package: TRIP
 Type: Package
-Title: T-cell Receptor/Immunoglobulin Profiler (TRIP)
+Title: T-cell Receptor/Immunoglobulin Profiler (TRIP)  
 Version: 0.99.0
 Author: Maria Kotouza
 Maintainer: Fotis E. Psomopoulos <fpsom@certh.gr>
@@ -12,27 +12,44 @@ Description: TRIP is a software framework that provides analytics services on
     data files from all samples and visualize the results accordingly.
 License: CC BY-NC-SA 4.0
 Encoding: UTF-8
-LazyData: TRUE
+LazyData: true
 Imports: 
-    plyr, 
-    data.table, 
-    Biostrings, 
-    plotly, 
-    xtable, 
+    shiny,
+    shinyjs,
+    shinycssloaders,
+    shinyFiles,
+    shinyBS,
+    plyr,
+    tidyverse,
+    data.table,
+    DT,
+    stringr,
+    BiocManager,
+    Biostrings,
+    stringdist,
+    xtable,
     plot3D, 
-    gridExtra,
-    RColorBrewer, 
-    stringdist, 
-    DT, 
-    tidyverse, 
-    rlist
+    gridExtra,  
+    RColorBrewer,  
+    plotly,  
+    rlist,
+    magrittr,
+    dplyr,
+    pryr
 Enhances: 
     parallel
+Suggests:
+    BiocGenerics,
+    motifStack
 Collate:
-    "libraries.R",
-    "helpers.R",
-    "run_TRIP_without_ui.R",
+    "TRIP-package.R"
+    "utils-pipe.R"
+    "global.R"
+    "helpers.R"
+    "run_TRIP_without_ui.R"
     "make_options.R"
+    "server.R"
+    "ui.R"
 URL: https://github.com/BiodataAnalysisGroup/TRIP
 BugReports: https://github.com/BiodataAnalysisGroup/TRIP/issues
 BiocType: Software

@@ -1,8 +1,6 @@
 
 #jsResetCode <- "shinyjs.reset = function() {history.go(0)}"
 
-source("helpers.R")
-
 function(request) {   
   # Add custom CSS & Javascript;
   appCSS <- "

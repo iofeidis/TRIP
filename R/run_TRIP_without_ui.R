@@ -1,5 +1,4 @@
-# source("libraries.R")
-# source("helpers.R")
+# run_TRIP_without_ui.R
 
 run_TRIP <- function(datapath, filelist, cell, throughput, preselection, selection, identity_range, vgenes, dgenes, jgenes, cdr3_length_range, aminoacid,
                      pipeline, select_clonotype, highly_sim_params, shared_clonotypes_params, highly_shared_clonotypes_params, repertoires_params, identity_groups,
@@ -763,18 +762,18 @@ run_TRIP <- function(datapath, filelist, cell, throughput, preselection, selecti
     thrClonoLogos <- 0.1
     if (Fthr){
       if (pipeline_highly_similar_clonotypes==F){
-        clono_allDataTopN=clono$clono_allData %>% filter(Freq>thrClonoLogos)
+        clono_allDataTopN=clono$clono_allData %>% dplyr::filter(Freq>thrClonoLogos)
         if (is.null(clono$clono_allData)) return()
         clono_datasetsTopN<-list()
         for (i in 1:length(loaded_datasets)){
-          clono_datasetsTopN[[loaded_datasets[i]]]=clono$clono_datasets[[loaded_datasets[i]]] %>% filter(Freq>thrClonoLogos)
+          clono_datasetsTopN[[loaded_datasets[i]]]=clono$clono_datasets[[loaded_datasets[i]]] %>% dplyr::filter(Freq>thrClonoLogos)
         }
       }else{
-        clono_allDataTopN=highly_sim %>% filter(Freq>thrClonoLogos)
+        clono_allDataTopN=highly_sim %>% dplyr::filter(Freq>thrClonoLogos)
         if (is.null(highly_sim)) return()
         clono_datasetsTopN<-list()
         for (i in 1:length(loaded_datasets)){
-          clono_datasetsTopN[[loaded_datasets[i]]]=highly_sim_datasets[[loaded_datasets[i]]] %>% filter(Freq>thrClonoLogos)
+          clono_datasetsTopN[[loaded_datasets[i]]]=highly_sim_datasets[[loaded_datasets[i]]] %>% dplyr::filter(Freq>thrClonoLogos)
         }
       }
     }
@@ -960,17 +959,16 @@ run_TRIP <- function(datapath, filelist, cell, throughput, preselection, selecti
   
   ############ save png files  ############### 
   
-  # source("save_png_files.R")
   clonotypes_barplot_select_range <- F
   clonotypes_barchart_threshold <- 0.1
   clonotypes_barchart_down_threshold <- 0.1
   clonotypes_barchart_up_threshold <- 1
   
   folder_name = paste("Analysis", trunc(as.numeric(Sys.time())))
-  if(!file.exists(paste0(tmp_path,"/",folder_name))){ # check if the directory has been made yet, I use the time/date at which the action button was pressed to make it relatively unique
-    dir.create(paste0(tmp_path,"/",folder_name))      # make the dir if not
+  if(!file.exists(paste0(tmp_path,"/output/",folder_name))){ # check if the directory has been made yet, I use the time/date at which the action button was pressed to make it relatively unique
+    dir.create(paste0(tmp_path,"/output/",folder_name))      # make the dir if not
   }                   
-  in.path = paste0(tmp_path,"/",folder_name)          # go into the dir, alternatively you could just set the path of the file each time
+  in.path = paste0(tmp_path,"/output/",folder_name)          # go into the dir, alternatively you could just set the path of the file each time
   
   #check if the following have run
   
@@ -988,10 +986,10 @@ run_TRIP <- function(datapath, filelist, cell, throughput, preselection, selecti
       cl <- c()
       a <- list()
       if(is.null(clonotypes_barchart_threshold)) thr=0 else thr=clonotypes_barchart_threshold
-      a[["allData"]]=clono$clono_allData %>% filter(clono$clono_allData$Freq>thr)
+      a[["allData"]]=clono$clono_allData %>% dplyr::filter(clono$clono_allData$Freq>thr)
       cl=c(cl,a[["allData"]]$clonotype)
       for (i in loaded_datasets){
-        a[[i]]=clono$clono_datasets[[i]] %>% filter(clono$clono_datasets[[i]]$Freq>thr)
+        a[[i]]=clono$clono_datasets[[i]] %>% dplyr::filter(clono$clono_datasets[[i]]$Freq>thr)
         cl<-c(cl,a[[i]]$clonotype)
       }
     } else {
@@ -1034,7 +1032,7 @@ run_TRIP <- function(datapath, filelist, cell, throughput, preselection, selecti
     png(paste0(in.path,"/","clonotypes_bar_plot_",parameters,".png"), width=3000, height=1550)
     barplot(freq_mat, 
             xlim = c(0, ncol(freq_mat) + 5),
-            col = brewer.pal(nrow(freq_mat), "Paired"),
+            col = RColorBrewer::brewer.pal(nrow(freq_mat), "Paired"),
             legend.text = TRUE,
             args.legend = list(x = ncol(freq_mat) + 5,
                                y = max(colSums(freq_mat)),
@@ -1063,10 +1061,10 @@ run_TRIP <- function(datapath, filelist, cell, throughput, preselection, selecti
       cl<-c()
       a<-list()
       if (is.null(higly_sim_clonotypes_barchart_threshold)) thr=0 else thr=higly_sim_clonotypes_barchart_threshold
-      a[["allData"]]=highly_sim %>% filter(highly_sim$Freq>thr)
+      a[["allData"]]=highly_sim %>% dplyr::filter(highly_sim$Freq>thr)
       cl=c(cl,a[["allData"]]$clonotype)
       for (i in loaded_datasets){
-        a[[i]]=highly_sim_datasets[[i]] %>% filter(highly_sim_datasets[[i]]$Freq>thr)
+        a[[i]]=highly_sim_datasets[[i]] %>% dplyr::filter(highly_sim_datasets[[i]]$Freq>thr)
         cl<-c(cl,a[[i]]$clonotype)
       }
 
@@ -1112,7 +1110,7 @@ run_TRIP <- function(datapath, filelist, cell, throughput, preselection, selecti
     barplot(
       freq_mat,
       xlim=c(0, ncol(freq_mat) + 5),
-      col=brewer.pal(nrow(freq_mat), "Paired"),
+      col=RColorBrewer::brewer.pal(nrow(freq_mat), "Paired"),
       legend.text=TRUE,
       args.legend=list(
         x=ncol(freq_mat) + 5,
@@ -1138,8 +1136,8 @@ run_TRIP <- function(datapath, filelist, cell, throughput, preselection, selecti
             
             #Genes that have percentage<threshold are grouped into one cell
             data=repertories_results[[k]]$Repertoires_allData
-            data_filterIn=data %>% filter(data$Freq>thr)
-            data_filterOut=data %>% filter(data$Freq<=thr)
+            data_filterIn=data %>% dplyr::filter(data$Freq>thr)
+            data_filterOut=data %>% dplyr::filter(data$Freq<=thr)
             data=data_filterIn
             data[(nrow(data)+1),]=c("Other genes",sum(data_filterOut$N),sum(data_filterOut$Freq))
             #plot
@@ -1154,8 +1152,8 @@ run_TRIP <- function(datapath, filelist, cell, throughput, preselection, selecti
           }else{
             #Genes that have percentage<threshold are grouped into one cell
             data=repertories_results[[k]]$Repertoires_datasets[[loaded_datasets[j]]]
-            data_filterIn=data %>% filter(data$Freq>thr)
-            data_filterOut=data %>% filter(data$Freq<=thr)
+            data_filterIn=data %>% dplyr::filter(data$Freq>thr)
+            data_filterOut=data %>% dplyr::filter(data$Freq<=thr)
             data=data_filterIn
             data[(nrow(data)+1),]=c("Other genes",sum(data_filterOut$N),sum(data_filterOut$Freq))
             
@@ -1186,8 +1184,8 @@ run_TRIP <- function(datapath, filelist, cell, throughput, preselection, selecti
             
             #Genes that have percentage<threshold are grouped into one cell
             data=HighlySim_repertories_results[[k]]$Repertoires_allData
-            data_filterIn=data %>% filter(data$Freq>thr)
-            data_filterOut=data %>% filter(data$Freq<=thr)
+            data_filterIn=data %>% dplyr::filter(data$Freq>thr)
+            data_filterOut=data %>% dplyr::filter(data$Freq<=thr)
             data=data_filterIn
             data[(nrow(data)+1),]=c("Other genes",sum(data_filterOut$N),sum(data_filterOut$Freq))
             #plot
@@ -1202,8 +1200,8 @@ run_TRIP <- function(datapath, filelist, cell, throughput, preselection, selecti
           }else{
             #Genes that have percentage<threshold are grouped into one cell
             data=HighlySim_repertories_results[[k]]$Repertoires_datasets[[loaded_datasets[j]]]
-            data_filterIn=data %>% filter(data$Freq>thr)
-            data_filterOut=data %>% filter(data$Freq<=thr)
+            data_filterIn=data %>% dplyr::filter(data$Freq>thr)
+            data_filterOut=data %>% dplyr::filter(data$Freq<=thr)
             data=data_filterIn
             data[(nrow(data)+1),]=c("Other genes",sum(data_filterOut$N),sum(data_filterOut$Freq))
             
@@ -1459,7 +1457,7 @@ run_TRIP <- function(datapath, filelist, cell, throughput, preselection, selecti
           }
           d=as.data.frame(d,stringsAsFactors=F)
           colnames(d)=var
-          d = d %>% dplyr::group_by((d[[var]])) %>% dplyr::summarise(n=n())
+          d = d %>% dplyr::group_by((d[[var]])) %>% dplyr::summarise(n=dplyr::n())
           d$Freq=100*d$n/nrow(clono$clono_datasets[[loaded_datasets[j]]])
           colnames(d)=c("Pi","n","Freq")
           d$Pi=as.numeric(d$Pi)
@@ -1685,20 +1683,20 @@ run_TRIP <- function(datapath, filelist, cell, throughput, preselection, selecti
     }
     #plot
     png(paste0(in.path,"/","hist3D-nucleotides of top ",topN, " clonotypes of datasets",input_datasets,".png"))
-    hist3D(y = 1:length(fileNames), x = 1:topN, z = nucleotides, clab = "Num of Nucleotides",ylab="Samples",xlab="Clonotypes",
+    plot3D::hist3D(y = 1:length(fileNames), x = 1:topN, z = nucleotides, clab = "Num of Nucleotides",ylab="Samples",xlab="Clonotypes",
            zlab="Num of Nucleotides",ticktype="detailed",axes=TRUE, theta=50, phi=25, expand=0.75)
     dev.off()
     
     if (length(fileNames)>1){
       #plot
       png(paste0(in.path,"/","persp3D-nucleotides of top ",topN, " clonotypes of datasets",input_datasets,".png"))
-      persp3D(y = 1:length(fileNames), x = 1:topN, z = nucleotides, clab = "Num of Nucleotides",ylab="Samples",xlab="Clonotypes",
+      plot3D::persp3D(y = 1:length(fileNames), x = 1:topN, z = nucleotides, clab = "Num of Nucleotides",ylab="Samples",xlab="Clonotypes",
               zlab="Num of Nucleotides",ticktype="detailed",axes=TRUE, theta=50, phi=25, expand=0.75)
       dev.off()
       
       #plot
       png(paste0(in.path,"/","image2D-nucleotides of top ",topN, " clonotypes of datasets",input_datasets,".png"))
-      image2D(y = 1:length(fileNames), x = 1:topN, z = nucleotides, clab = "Num of Nucleotides",ylab="Samples",xlab="Clonotypes",
+      plot3D::image2D(y = 1:length(fileNames), x = 1:topN, z = nucleotides, clab = "Num of Nucleotides",ylab="Samples",xlab="Clonotypes",
               colkey = list(dist = 0, shift = 0.15,
                             side = 4, length = 0.5, width = 0.5,
                             cex.clab = 1, col.clab = "black", line.clab = 1.4,

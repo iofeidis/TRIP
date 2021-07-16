@@ -15,7 +15,7 @@ option_list <- list(
   make_option(
     opt_str=c("-a","--datapath"),
     action="store",
-    default="data/Tcell",
+    default="inst/extdata/Tcell_short",
     help=paste0("The directory where the folders of the patients' data are located.")
   ),
   
@@ -311,10 +311,6 @@ option_list <- list(
 opt <- parse_args(OptionParser(option_list=option_list));
 
 filelist <- strsplit(opt$filelist, ",")[[1]]
-
-# source(cat(getwd(),"R/run_TRIP_without_ui.R", sep=""))
-# list.files()
-# source("run_TRIP_without_ui.R")
 
 run_TRIP(datapath = opt$datapath, 
          filelist = filelist, 
